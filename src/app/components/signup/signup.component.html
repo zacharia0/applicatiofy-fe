@@ -1,0 +1,50 @@
+<h1>Sign Up</h1>
+
+<form [formGroup]="signUpForm" (ngSubmit) = 'onRegister()'>
+  <div>
+    <div>
+
+      <span>* Required fields.</span>
+    </div>
+    <label>First Name:*</label>
+    <input formControlName = 'firstName' type="text">
+    <span *ngIf="signUpForm.get('firstName')?.invalid && signUpForm.get('firstName')?.touched ">
+      First Name is required
+    </span>
+  </div>
+  <div>
+    <label >Last Name:*</label>
+    <input formControlName = "lastName" type="text">
+    <span *ngIf ="signUpForm.get('lastName')?.invalid && signUpForm.get('lastName')?.touched">
+      Last Name is required
+    </span>
+  </div>
+
+  <div>
+    <label> Username:* </label>
+    <input formControlName ="username" type="text">
+    <div *ngIf="signUpForm.get('username')?.touched">
+      <span *ngIf="signUpForm.get('username')?.errors?.['required']">
+        Username is required
+      </span>
+    </div>
+  </div>
+
+  <div>
+
+    <label > Password:*</label>
+    <input  formControlName = "password" type="password">
+    <div *ngIf="signUpForm.get('password')?.touched">
+      <span *ngIf ="signUpForm.get('password')?.errors?.['required']">
+        Password is required
+      </span>
+      <span *ngIf="signUpForm.get('password')?.errors?.['minlength']">
+        Password Must be at least 6 characters long
+      </span>
+    </div>
+
+
+  </div>
+  <button [disabled]="signUpForm.invalid" type ="submit">Sign Up</button>
+</form>
+<p>{{message}}</p>
