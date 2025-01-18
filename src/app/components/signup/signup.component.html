@@ -3,7 +3,6 @@
 <form [formGroup]="signUpForm" (ngSubmit) = 'onRegister()'>
   <div>
     <div>
-
       <span>* Required fields.</span>
     </div>
     <label>First Name:*</label>
@@ -22,7 +21,7 @@
 
   <div>
     <label> Username:* </label>
-    <input formControlName ="username" type="text">
+    <input formControlName ="username" type="text" autocomplete="new-password">
     <div *ngIf="signUpForm.get('username')?.touched">
       <span *ngIf="signUpForm.get('username')?.errors?.['required']">
         Username is required
@@ -33,7 +32,7 @@
   <div>
 
     <label > Password:*</label>
-    <input  formControlName = "password" type="password">
+    <input  formControlName = "password" type="password" autocomplete="new-password">
     <div *ngIf="signUpForm.get('password')?.touched">
       <span *ngIf ="signUpForm.get('password')?.errors?.['required']">
         Password is required
@@ -48,3 +47,5 @@
   <button [disabled]="signUpForm.invalid" type ="submit">Sign Up</button>
 </form>
 <p>{{message}}</p>
+
+<span>Already have an account? <button routerLink = "/login">Login</button></span>

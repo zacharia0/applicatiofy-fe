@@ -1,6 +1,13 @@
-<p>{{title}}</p>
-<p>{{titles}}</p>
 
-<app-signup/>
-<!--<app-sign-in/>-->
+
+<div *ngIf="currentUser">
+  {{title}}
+  {{titles}}
+  <h4 >Hello,{{currentUser?.firstName}} {{currentUser?.lastName}}</h4>
+
+</div>
+
+
+<!--  <app-sign-in/>-->
+
 <router-outlet />

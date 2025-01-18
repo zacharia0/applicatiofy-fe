@@ -1,26 +1,31 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {NgIf} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {SignInComponent} from '../sign-in/sign-in.component';
 import {AuthService} from '../../services/auth.service';
-import {first} from 'rxjs';
+import {first, Subject, takeUntil} from 'rxjs';
+import {Router, RouterLink} from '@angular/router';
+import {RegisterInterface} from '../../Interfaces/RegisterInterface';
 
 @Component({
   selector: 'app-signup',
   imports: [
     ReactiveFormsModule,
     NgIf,
-    SignInComponent
+    SignInComponent,
+    RouterLink,
+
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit{
 
   signUpForm:FormGroup;
   message:string = ""
+  private destroy$ = new Subject<void>()
 
-  constructor(private fb:FormBuilder,private authService:AuthService) {
+  constructor(private fb:FormBuilder,private authService:AuthService, private router:Router) {
     this.signUpForm = this.fb.group({
       firstName:['',[Validators.required]],
       lastName:['',[Validators.required]],
@@ -29,18 +34,31 @@ export class SignupComponent {
     })
   }
 
+
+
+
+
+  ngOnInit():void{
+    this.signUpForm.reset()
+  }
+
+
+
   onRegister():void{
     if(this.signUpForm.valid){
-      const {firstName,lastName,username,password} = this.signUpForm.value
-      this.authService.register(firstName,lastName,username,password).subscribe({
-        next:()=>{
-          this.message = "Registration Successful!"
-          this.signUpForm.reset();
+      const registerData:RegisterInterface = this.signUpForm.value
+
+      this.authService.register(registerData).pipe(takeUntil(this.destroy$)).subscribe({
+        next:() =>{
+          console.log("registered in successfully ")
+          this.router.navigate(["/login"])
         },
-        error:(error) =>{
-          this.message = 'Error:' + (error.error.message || "Unable to register")
+        error:(err)=>{
+          console.log(err)
+          this.message = err.error.error || "Unable to register, please try again later"
         }
       })
+
     }
 
   }
