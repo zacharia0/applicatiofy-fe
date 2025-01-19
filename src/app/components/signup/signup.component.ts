@@ -12,7 +12,6 @@ import {RegisterInterface} from '../../Interfaces/RegisterInterface';
   imports: [
     ReactiveFormsModule,
     NgIf,
-    SignInComponent,
     RouterLink,
 
   ],

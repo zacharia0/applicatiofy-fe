@@ -1,0 +1,49 @@
+<form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+  <div>
+    <label>First Name: </label>
+    <input formControlName ="firstName" type="text" >
+    <div *ngIf="updateForm.get('firstName')?.touched">
+      <span *ngIf="updateForm.get('firstName')?.errors?.['required']">
+        First Name is required
+      </span>
+    </div>
+  </div>
+  <div>
+    <label>Last Name: </label>
+    <input type="text" formControlName="lastName">
+    <div *ngIf="updateForm.get('lastName')?.touched">
+      <span *ngIf="updateForm.get('lastName')?.errors?.['required']">
+        Last name is required
+      </span>
+    </div>
+  </div>
+
+  <div>
+    <label>New Password: </label>
+    <input type="password" formControlName = "password">
+    <div *ngIf="updateForm.get('password')?.touched">
+      <span *ngIf="updateForm.get('password')?.errors?.['required']">
+        Password is required
+      </span>
+      <span *ngIf="updateForm.get('password')?.errors?.['minlength']">
+        Password must be at least 6 characters long.
+      </span>
+    </div>
+  </div>
+
+<!--  <div>-->
+<!--    <label>Re-enter new password:</label>-->
+<!--    <input type="password" formControlName ="password2">-->
+<!--    <div *ngIf="updateForm.get('password2')?.touched">-->
+<!--      <span *ngIf="updateForm.get('password2')?.errors?.['required']">-->
+<!--        Password is required-->
+<!--      </span>-->
+<!--      <span *ngIf="updateForm.get('password2')?.errors?.['minlength']">-->
+<!--        Password must be at least 6 characters long.-->
+<!--      </span>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <button [disabled]="updateForm.invalid" type="submit">Update</button>
+  {{message}}
+</form>

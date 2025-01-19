@@ -58,5 +58,10 @@ export class AuthService {
 
   }
 
+  updatedCurrentUser(updatedUser:User):void{
+    this.currentUserSubject.next(updatedUser)
+
+  }
+
 
 }

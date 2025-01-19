@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {SignupComponent} from './components/signup/signup.component';
 import {SignInComponent} from './components/sign-in/sign-in.component';
 import {AuthService} from './services/auth.service';
@@ -10,7 +10,7 @@ import {Subject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SignupComponent, SignInComponent, NgIf, DashboardComponent],
+  imports: [RouterOutlet, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -18,9 +18,10 @@ export class AppComponent implements OnInit{
   title:string = 'applicatiofy-fe';
   titles = "Does this work?"
   currentUser!: User | null
+  isSignInUpRoute = false
 
   private destroy$ = new Subject<void>()
-  constructor(private authService:AuthService) {
+  constructor(private authService:AuthService, private router:Router) {
 
 
   }
@@ -33,6 +34,12 @@ export class AppComponent implements OnInit{
       error:(err)=>{
         console.error("ERROR FETCHING USER" + err)
       }
+    })
+
+    // Listen for route changes
+    this.router.events.subscribe(() =>{
+      // check if the current route is /signIn
+      this.isSignInUpRoute = this.router.url === '/signIn' || this.router.url === "/signup"
     })
     console.log("Inside the app.js init")
 

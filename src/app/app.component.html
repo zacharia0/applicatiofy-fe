@@ -1,10 +1,12 @@
 
 
-<div *ngIf="currentUser">
+<div *ngIf="currentUser && !isSignInUpRoute">
   {{title}}
   {{titles}}
-  <h4 >Hello,{{currentUser?.firstName}} {{currentUser?.lastName}}</h4>
-
+  <h4 >Hello,{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+  <h1 class="text-3xl font-bold underline">
+    Hello world!!
+  </h1>
 </div>
 
 
