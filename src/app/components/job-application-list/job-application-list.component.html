@@ -1,0 +1,10 @@
+<div *ngIf="jobApplicationList">
+  <div *ngFor=" let list of jobApplicationList">
+    {{ list.jobTitle }}
+  </div>
+
+</div>
+<div *ngIf="jobApplicationList.length === 0">
+  <span>Empty Job Application</span>
+  <button routerLink = "/create-job">Add Job Application</button>
+</div>

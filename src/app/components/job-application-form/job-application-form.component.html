@@ -1,0 +1,45 @@
+<form [formGroup]="applicationForm" (ngSubmit)="onSubmitForm()">
+  <div>
+    Job Title:
+    <input type="text" formControlName='jobTitle'>
+  </div>
+  <div>
+    Company Name:
+    <input type="text" formControlName='companyName'>
+  </div>
+  <div>
+    Application Date:
+    <input type="date" formControlName='applicationDate'>
+  </div>
+  <div>
+    Inverview Date:
+    <input type="date" formControlName = 'interviewDate'>
+  </div>
+  <div>
+    Application Method:
+    <input type="text" formControlName='applicationMethod'>
+  </div>
+  <div>
+    Application Status:
+    <input type="text" formControlName='status'>
+  </div>
+  <div>
+    Application Link:
+    <input type="text" formControlName='applicationLink'>
+  </div>
+  <div>
+    Recruiter Name:
+    <input type="text" formControlName = 'recruiterName'>
+  </div>
+  <div>
+    Recruiter Contact:
+    <input type="text" formControlName = 'recruiterContact'>
+  </div>
+  <div>
+    Notes:
+    <input type="text" formControlName = 'notes'>
+  </div>
+
+  <button type="submit">Create Job Application</button>
+
+</form>
