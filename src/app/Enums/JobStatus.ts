@@ -1,0 +1,6 @@
+export enum JobStatus{
+  APPLIED,
+  INTERVIEW_SCHEDULED,
+  OFFERED,
+  REJECTED
+}
