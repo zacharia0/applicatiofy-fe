@@ -11,7 +11,7 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgIf, RouterLink, SidebarComponent],
+  imports: [RouterOutlet, NgIf, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
