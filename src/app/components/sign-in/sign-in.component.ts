@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import {Router, RouterLink} from '@angular/router';
-import {LoginInterface} from '../../Interfaces/LoginInterface';
+import {ILogin} from '../../Interfaces/ILogin';
 import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 import {Subject, takeUntil} from 'rxjs';
 
@@ -33,7 +33,7 @@ export class SignInComponent {
 
   onLogin():void{
     if(this.signInForm.valid){
-      const loginData:LoginInterface = this.signInForm.value
+      const loginData:ILogin = this.signInForm.value
       this.authService.login(loginData).pipe(takeUntil(this.destroy$)).subscribe({
         next:() =>{
           console.log("Logged In success Fully")

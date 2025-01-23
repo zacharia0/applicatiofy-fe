@@ -1,0 +1,29 @@
+<div *ngIf="!isEditing">
+  {{singleJobApplication?.jobTitle}}
+  {{singleJobApplication?.companyName}}
+
+  <button>Delete</button>
+  <button (click) = "onEditing()">Update</button>
+
+</div>
+
+
+<div *ngIf="isEditing">
+  <form [formGroup] = "jobApplicationForm" >
+
+    <div>
+      Job Title:
+      <input formControlName = "jobTitle" type="text">
+
+      companyName:
+      <input type="text" formControlName = "companyName">
+
+      status:
+      <input type="text" formControlName = "status">
+
+
+    </div>
+    <button (click) = "onCancel()">Cancel</button>
+    <button (click) = "onUpdate()">Update</button>
+  </form>
+</div>

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 import {Router} from '@angular/router';
-import {User} from '../Interfaces/UserInterface';
-import {LoginInterface} from '../Interfaces/LoginInterface';
-import {RegisterInterface} from '../Interfaces/RegisterInterface';
+import {User} from '../Interfaces/IUser';
+import {ILogin} from '../Interfaces/ILogin';
+import {IRegister} from '../Interfaces/IRegister';
 import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Injectable({
@@ -34,7 +34,7 @@ export class AuthService {
     return this.currentUserSubject.value
   }
 
-  login(loginData:LoginInterface): Observable<User> {
+  login(loginData:ILogin): Observable<User> {
     return this.http
       .post<User>(`${this.baseUrl}/signIn`, loginData)
       .pipe(
@@ -47,7 +47,7 @@ export class AuthService {
       )
   }
 
-  register(registerData:RegisterInterface) {
+  register(registerData:IRegister) {
     return this.http.post(`${this.baseUrl}/signup`, registerData)
   }
 

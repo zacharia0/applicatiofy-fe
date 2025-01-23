@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {AuthService} from '../../services/auth.service';
-import {User} from '../../Interfaces/UserInterface';
+import {User} from '../../Interfaces/IUser';
 
 @Component({
   selector: 'app-sidebar',

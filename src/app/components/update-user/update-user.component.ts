@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
-import {User} from '../../Interfaces/UserInterface';
+import {User} from '../../Interfaces/IUser';
 import {NgIf} from '@angular/common';
-import {UpdateUser} from '../../Interfaces/UpdateUserInterface';
+import {UpdateUser} from '../../Interfaces/IUpdateUser';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {Subject, takeUntil} from 'rxjs';

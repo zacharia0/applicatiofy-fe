@@ -5,7 +5,7 @@ import {SignInComponent} from '../sign-in/sign-in.component';
 import {AuthService} from '../../services/auth.service';
 import {first, Subject, takeUntil} from 'rxjs';
 import {Router, RouterLink} from '@angular/router';
-import {RegisterInterface} from '../../Interfaces/RegisterInterface';
+import {IRegister} from '../../Interfaces/IRegister';
 
 @Component({
   selector: 'app-signup',
@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit{
 
   onRegister():void{
     if(this.signUpForm.valid){
-      const registerData:RegisterInterface = this.signUpForm.value
+      const registerData:IRegister = this.signUpForm.value
 
       this.authService.register(registerData).pipe(takeUntil(this.destroy$)).subscribe({
         next:() =>{

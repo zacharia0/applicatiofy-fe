@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {JobApplicationService} from '../../services/job-application.service';
-import {JobApplicationForm} from '../../Interfaces/JobApplicationForm';
+import {IJobApplicationForm} from '../../Interfaces/IJobApplicationForm';
 import {NgForOf, NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 
@@ -15,7 +15,7 @@ import {RouterLink} from '@angular/router';
   styleUrl: './job-application-list.component.css'
 })
 export class JobApplicationListComponent implements OnInit{
-  jobApplicationList!:JobApplicationForm[]
+  jobApplicationList!:IJobApplicationForm[]
   constructor(private jobApplicationService:JobApplicationService) {
   }
 
@@ -23,13 +23,17 @@ export class JobApplicationListComponent implements OnInit{
     this.jobApplicationService.jobApplications$.subscribe({
       next:(jobList) =>{
         this.jobApplicationList = jobList
-        console.log(this.jobApplicationList.length)
+        console.log(this.jobApplicationList)
       },
       error:(err)=>{
         console.log(err)
       }
     })
     this.jobApplicationService.fetchAllJobApplication()
+  }
+
+  onView(value:IJobApplicationForm):void{
+    console.log(value)
   }
 
 

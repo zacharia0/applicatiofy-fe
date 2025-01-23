@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
-import {JobApplicationAccount} from '../../Interfaces/JobApplicationAccount';
-import {User} from '../../Interfaces/UserInterface';
+import {IJobApplicationAccount} from '../../Interfaces/IJobApplicationAccount';
+import {User} from '../../Interfaces/IUser';
 import {JobApplicationService} from '../../services/job-application.service';
 
 @Component({
@@ -16,7 +16,7 @@ import {JobApplicationService} from '../../services/job-application.service';
 export class JobApplicationFormComponent implements OnInit {
 
   applicationForm!: FormGroup
-  account!: JobApplicationAccount
+  account!: IJobApplicationAccount
 
   constructor(private fb: FormBuilder, private authService: AuthService, private jobApplicationService:JobApplicationService) {
 
@@ -35,6 +35,7 @@ export class JobApplicationFormComponent implements OnInit {
           }
         }
         this.initializeForm(this.account)
+
       },
       error: (err) => {
         console.log("Error inside the job-application-form" + err)
@@ -42,7 +43,7 @@ export class JobApplicationFormComponent implements OnInit {
     })
   }
 
-  initializeForm(account: JobApplicationAccount): void {
+  initializeForm(account: IJobApplicationAccount): void {
     this.applicationForm = this.fb.group({
       jobTitle: ['', [Validators.required]],
       companyName: ['', [Validators.required]],
@@ -56,17 +57,30 @@ export class JobApplicationFormComponent implements OnInit {
       notes: ['', ],
       account: [account]
 
-
     })
   }
 
   onSubmitForm():void{
+    console.log("Dddddddddd")
     if(this.applicationForm.valid){
       const jobApplicationData = this.applicationForm.value
 
       this.jobApplicationService.createJobApplication(jobApplicationData).subscribe({
         next:()=>{
           console.log("Successfully Submitted job application.")
+          this.applicationForm.reset({
+            jobTitle: '',
+            companyName: '',
+            applicationDate: '',
+            interviewDate: '',
+            applicationMethod: '',
+            status: '',
+            applicationLink: '',
+            recruiterName: '',
+            recruiterContact: '',
+            notes: '',
+            // account:{}
+          })
         },
         error:(err) =>{
           console.log(err)

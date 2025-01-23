@@ -1,9 +1,7 @@
 import {JobStatus} from '../Enums/JobStatus';
-import {User} from './UserInterface';
-import {JobApplicationAccount} from './JobApplicationAccount';
 
-export interface JobApplicationForm {
-
+export interface IUpdateJobApplication{
+  id:number,
   jobTitle:string,
   companyName:string,
   applicationDate:Date,
@@ -14,9 +12,4 @@ export interface JobApplicationForm {
   recruiterName:string,
   recruiterContact:string,
   notes:string,
-  account:JobApplicationAccount
-
-
 }
-
-

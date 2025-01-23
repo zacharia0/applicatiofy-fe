@@ -1,6 +1,7 @@
 <div *ngIf="jobApplicationList">
   <div *ngFor=" let list of jobApplicationList">
     {{ list.jobTitle }}
+    <button routerLink = "/application-detail/{{list.id}}">View</button>
   </div>
 
 </div>

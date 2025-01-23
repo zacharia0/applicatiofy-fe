@@ -5,7 +5,7 @@ import {SignInComponent} from './components/sign-in/sign-in.component';
 import {AuthService} from './services/auth.service';
 import {NgIf} from '@angular/common';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {User} from './Interfaces/UserInterface';
+import {User} from './Interfaces/IUser';
 import {Subject, takeUntil} from 'rxjs';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 
