@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import {BehaviorSubject, filter, map, Observable} from 'rxjs';
 import {IJobApplicationForm} from '../Interfaces/IJobApplicationForm';
 import {IUpdateJobApplication} from '../Interfaces/IUpdateJobApplication';
 
@@ -84,6 +84,17 @@ export class JobApplicationService {
 
   }
 
-
+  deleteJobApplication(jobId:number):Observable<any>{
+    const token = this.fetchToken()
+    console.log(token)
+     return this.http.delete(`${this.baseUrl}/delete/${jobId}`,{
+      headers:{
+        "Authorization":`Bearer ${token}`
+      }
+    }).pipe(map((deletedJob) =>{
+       console.log(deletedJob)
+       return deletedJob
+     }))
+  }
 
 }

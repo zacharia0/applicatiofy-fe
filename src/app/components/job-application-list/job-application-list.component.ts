@@ -32,9 +32,7 @@ export class JobApplicationListComponent implements OnInit{
     this.jobApplicationService.fetchAllJobApplication()
   }
 
-  onView(value:IJobApplicationForm):void{
-    console.log(value)
-  }
+
 
 
 }

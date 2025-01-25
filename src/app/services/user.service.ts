@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UpdateUser} from '../Interfaces/IUpdateUser';
 import {map, Observable} from 'rxjs';
-import {UpdateUserComponent} from '../components/update-user/update-user.component';
-import {User} from '../Interfaces/IUser';
 import {AuthService} from './auth.service';
 
 @Injectable({

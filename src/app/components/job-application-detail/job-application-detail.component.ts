@@ -70,4 +70,16 @@ export class JobApplicationDetailComponent implements OnInit{
     }
   }
 
+  onDelete():void{
+    this.jobApplicationService.deleteJobApplication(Number(this.jobId)).subscribe({
+      next:(data)=>{
+        console.log(data)
+        this.router.navigate(["/application-list"])
+      },
+      error:(err) =>{
+        console.warn(err)
+      }
+    })
+  }
+
 }
