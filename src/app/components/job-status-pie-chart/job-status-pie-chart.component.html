@@ -1,0 +1,22 @@
+<div class="w-full max-w-[600px] h-[700px] mx-auto">
+  <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [type]="pieChartType"
+          [options]="pieChartOptions">
+  </canvas>
+
+  <div >
+    <app-job-application-list/>
+
+  </div>
+</div>
+
+<!--<div>-->
+<!--  <ul>-->
+<!--    <li *ngFor = "let item of paginatedItem">{{item}}</li>-->
+<!--  </ul>-->
+<!--  <button (click) ="goToPreviousPage()" [disabled]="currentPage ===1">Previous</button>-->
+<!--  <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">Next</button>-->
+<!--</div>-->
+

@@ -1,11 +1,91 @@
 <div *ngIf="jobApplicationList">
-  <div *ngFor=" let list of jobApplicationList">
-    {{ list.jobTitle }}
-    <button routerLink = "/application-detail/{{list.id}}">View</button>
+<!--  <div *ngFor=" let list of jobApplicationList">-->
+<!--    {{ list.jobTitle }}-->
+<!--    <button routerLink = "/application-detail/{{list.id}}">View</button>-->
+<!--    <button (click) = "onDelete(list.id)">Delete</button>-->
+<!--  </div>-->
+
+<!--  <div>______________________________________________________________________</div>-->
+<!--  <ul>-->
+<!--    <li *ngFor="let item of PaginatedItem">{{item.jobTitle}}</li>-->
+<!--  </ul>-->
+<!--  <button (click)="goToPreviousPage()" [disabled]="">Previous</button>-->
+<!--  <button (click)="goToNextPage()">Next</button>-->
+
+
+
+<!--  Table layout (visible on medium screens and above)-->
+  <div  class="hidden md:block overflow-x-auto mr-8">
+    <table class="min-w-full bg-white border border-gray-300">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="py-2 px-4 border-b">Job Title</th>
+          <th class="py-2 px-4 border-b">Company Name</th>
+          <th class="py-2 px-4 border-b">Status</th>
+          <th class="py-2 px-4 border-b">Applied Date</th>
+          <th class="py-2 px-4 border-b">Interview Date</th>
+          <th class="py-2 px-4 border-b">Application Link</th>
+          <th class ="py-2 px-4 border-b">Recruiter Name</th>
+          <th class="py-2 px-4 border-b"> Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let job of jobApplicationList" class="hover:bg-blue-50">
+        <td class="py-2 px-4 border-b ">{{job.jobTitle}}</td>
+        <td class="py-2 px-4 border-b">{{job.companyName}}</td>
+        <td class="py-2 px-4 border-b">{{job.status}}</td>
+        <td class="py-2 px-4 border-b">{{job.applicationDate || "N/A"}} </td>
+        <td class="py-2 px-4 border-b">{{job.interviewDate || "N/A"}}</td>
+        <td class="py-2 px-4 border-b"><a href="{{job.applicationLink}}" target="_blank">{{job.applicationLink || "N/A"}}</a></td>
+        <td class="py-2 px-4 border-b">{{job.recruiterName || "N/A"}}</td>
+        <td class = "py-2 px-4 border-b">
+          <button class="bg-red-500 hover:bg-red-700  rounded-lg py-2 px-4 text-white" (click)="onDelete(job.id)">Delete</button>
+          <button class="px-4 py-2 bg-gray-400 hover:bg-gray-600 text-white rounded-lg ml-4"  routerLink = "/application-detail/{{job.id}}">View</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
+
+
+<!--  Card Layout (Visible on small screens-->
+  <div *ngFor="let job of jobApplicationList" class="block md:hidden space-y-4 mr-8">
+    <div class="bg-white py-4 border border-gray-300 rounded-lg shadow-sm">
+      <div  class="flex flex-col space-y-2 ml-2 overflow-x-auto">
+        <div><span class="font-semibold">Job Title:</span> {{job.jobTitle}}</div>
+        <div><span class="font-semibold">Company Name: </span> {{job.companyName}}</div>
+        <div><span class ="font-semibold">Status:</span> {{job.status}}</div>
+        <div><span class="font-semibold">Applied Date:</span> {{job.applicationDate || "N/A"}}</div>
+        <div><span class="font-semibold">Application Link:</span> {{job.applicationLink || "N/A"}}</div>
+        <div><span class="font-semibold">Recruiter Name:</span> {{job.recruiterName || "N/A"}}</div>
+        <div>
+          <button class="bg-red-500 py-2 px-4 rounded-lg text-white hover:bg-red-600" (click)="onDelete(job.id)">Delete</button>
+          <button class="bg-gray-400 hover:bg-gray-600 rounded-lg py-2 px-4 ml-2 text-white" routerLink = "/application-detail/{{job.id}}">View</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </div>
 <div *ngIf="jobApplicationList.length === 0">
   <span>Empty Job Application</span>
   <button routerLink = "/create-job">Add Job Application</button>
 </div>
+
+

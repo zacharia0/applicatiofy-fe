@@ -19,7 +19,9 @@
       <input type="text" formControlName = "companyName">
 
       status:
-      <input type="text" formControlName = "status">
+      <select formControlName = "status">
+        <option *ngFor="let status of jobStatusLabel" [value]="status.key">{{status.value}}</option>
+      </select>
 
 
     </div>

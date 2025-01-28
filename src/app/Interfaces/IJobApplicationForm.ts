@@ -1,9 +1,8 @@
 import {JobStatus} from '../Enums/JobStatus';
-import {User} from './IUser';
 import {IJobApplicationAccount} from './IJobApplicationAccount';
 
 export interface IJobApplicationForm {
-  id:string,
+  id:number,
   jobTitle:string,
   companyName:string,
   applicationDate:Date,

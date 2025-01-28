@@ -21,7 +21,10 @@
   </div>
   <div>
     Application Status:
-    <input type="text" formControlName='status'>
+<!--    <input type="text" formControlName='status'>-->
+    <select formControlName = "status"  >
+      <option *ngFor="let status of jobStatusOptions2"  [value]="status.key">{{status.value}}</option>
+    </select>
   </div>
   <div>
     Application Link:

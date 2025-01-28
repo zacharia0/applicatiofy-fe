@@ -4,11 +4,14 @@ import {AuthService} from '../../services/auth.service';
 import {IJobApplicationAccount} from '../../Interfaces/IJobApplicationAccount';
 import {User} from '../../Interfaces/IUser';
 import {JobApplicationService} from '../../services/job-application.service';
+import {JobStatus, JobStatus2, JobStatusMapping} from '../../Enums/JobStatus';
+import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-job-application-form',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgForOf
   ],
   templateUrl: './job-application-form.component.html',
   styleUrl: './job-application-form.component.css'
@@ -17,6 +20,9 @@ export class JobApplicationFormComponent implements OnInit {
 
   applicationForm!: FormGroup
   account!: IJobApplicationAccount
+
+  jobStatusOptions = Object.values(JobStatus)
+  jobStatusOptions2:{key:string,value:string}[] = this.getJobStatusOption()
 
   constructor(private fb: FormBuilder, private authService: AuthService, private jobApplicationService:JobApplicationService) {
 
@@ -50,7 +56,7 @@ export class JobApplicationFormComponent implements OnInit {
       applicationDate: [''],
       interviewDate: ['', ],
       applicationMethod: ['', ],
-      status: ['',],
+      status: [JobStatus.APPLIED],
       applicationLink: ['', ],
       recruiterName: ['', ],
       recruiterContact: ['', ],
@@ -61,9 +67,18 @@ export class JobApplicationFormComponent implements OnInit {
   }
 
   onSubmitForm():void{
-    console.log("Dddddddddd")
     if(this.applicationForm.valid){
-      const jobApplicationData = this.applicationForm.value
+      const formValue = this.applicationForm.value
+
+      console.log("******" + formValue)
+      //Map the selected status to the backend-compatible value
+      const backendCompatibleStatus = JobStatusMapping[formValue.status];
+
+      //Create the payload with the backend-compatible status
+      const jobApplicationData = {
+        ...formValue,
+        status:backendCompatibleStatus
+      }
 
       this.jobApplicationService.createJobApplication(jobApplicationData).subscribe({
         next:()=>{
@@ -74,7 +89,7 @@ export class JobApplicationFormComponent implements OnInit {
             applicationDate: '',
             interviewDate: '',
             applicationMethod: '',
-            status: '',
+            status: JobStatus.APPLIED,
             applicationLink: '',
             recruiterName: '',
             recruiterContact: '',
@@ -90,4 +105,13 @@ export class JobApplicationFormComponent implements OnInit {
   }
 
 
+  getJobStatusOption():{key:string,value:string}[]{
+    return Object.keys(JobStatus2).map(key =>({
+      key:key,
+      value:JobStatus2[key as keyof typeof JobStatus]
+    }))
+  }
+
+
+  protected readonly JobStatus = JobStatus;
 }
