@@ -3,20 +3,29 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {JobApplicationService} from '../../services/job-application.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {IUpdateJobApplication} from '../../Interfaces/IUpdateJobApplication';
-import {JobStatus, JobStatus2, JobStatusMapping} from '../../Enums/JobStatus';
+import {JobStatus, JobStatus2} from '../../Enums/JobStatus';
+import {faTrashCan,faPen} from '@fortawesome/free-solid-svg-icons';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-job-application-detail',
   imports: [
     NgIf,
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
+    FaIconComponent
   ],
   templateUrl: './job-application-detail.component.html',
   styleUrl: './job-application-detail.component.css'
 })
 export class JobApplicationDetailComponent implements OnInit {
+
+  // ICONS
+  faTrashCan = faTrashCan
+  faPen = faPen
+
+
+
   singleJobApplication!: any
   jobId!: string;
   isEditing: boolean = false;

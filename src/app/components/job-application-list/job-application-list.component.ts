@@ -3,18 +3,25 @@ import {JobApplicationService} from '../../services/job-application.service';
 import {IJobApplicationForm} from '../../Interfaces/IJobApplicationForm';
 import {NgForOf, NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import {faTrashCan,faEye} from '@fortawesome/free-solid-svg-icons';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-job-application-list',
   imports: [
     NgForOf,
     NgIf,
-    RouterLink
+    RouterLink,
+    FaIconComponent
   ],
   templateUrl: './job-application-list.component.html',
   styleUrl: './job-application-list.component.css'
 })
 export class JobApplicationListComponent implements OnInit{
+
+  // ICONS
+  faTrashCan = faTrashCan
+  faEye = faEye
 
 
   itemsPerPage = 5
@@ -77,6 +84,5 @@ export class JobApplicationListComponent implements OnInit{
     })
 
   }
-
 
 }

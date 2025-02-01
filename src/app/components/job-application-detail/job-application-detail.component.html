@@ -2,8 +2,8 @@
   {{singleJobApplication?.jobTitle}}
   {{singleJobApplication?.companyName}}
 
-  <button (click) = 'onDelete()'>Delete</button>
-  <button (click) = "onEditing()">Update</button>
+  <button (click) = 'onDelete()' class="bg-red-500 hover:bg-red-600 rounded-lg py-2 px-6 mr-3 text-white"><fa-icon [icon] ="faTrashCan"/></button>
+  <button (click) = "onEditing()" class="bg-blue-500 hover:bg-blue-600 rounded-lg py-2 px-6 text-white "><fa-icon [icon] = "faPen"/></button>
 
 </div>
 
@@ -25,7 +25,7 @@
 
 
     </div>
-    <button (click) = "onCancel()">Cancel</button>
-    <button (click) = "onUpdate()">Update</button>
+    <button (click) = "onCancel()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg mr-2 mt-3">Cancel</button>
+    <button (click) = "onUpdate()" class="bg-blue-500 hover:bg-blue-600 rounded-lg py-2 px-4 ml-2 mt-3">Save</button>
   </form>
 </div>

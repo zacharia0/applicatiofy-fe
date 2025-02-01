@@ -10,7 +10,7 @@ import {NgForOf} from '@angular/common';
   imports: [
     BaseChartDirective,
     JobApplicationListComponent,
-    NgForOf
+
   ],
   templateUrl: './job-status-pie-chart.component.html',
   styleUrl: './job-status-pie-chart.component.css'

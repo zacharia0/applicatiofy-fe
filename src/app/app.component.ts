@@ -8,16 +8,18 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {User} from './Interfaces/IUser';
 import {Subject, takeUntil} from 'rxjs';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgIf, SidebarComponent],
+  imports: [RouterOutlet, SidebarComponent, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
-  title:string = 'applicatiofy-fe';
-  titles = "Does this work?"
+
+  isSidebarOpen = false
+
   currentUser!: User | null
   isSignInUpRoute = false
 
@@ -45,4 +47,10 @@ export class AppComponent implements OnInit{
     console.log("Inside the app.js init")
 
   }
+
+
+  toggleSidebar(){
+    this.isSidebarOpen = !this.isSidebarOpen
+  }
+
 }

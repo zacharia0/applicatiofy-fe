@@ -1,36 +1,21 @@
-<div *ngIf="currentUser && !isSignInUpRoute">
+<div class="flex min-h-screen" >
 
+  <div *ngIf="currentUser">
+    <app-sidebar ></app-sidebar>
 
-  {{ title }}
-  {{ titles }}
-  <h4>Hello,{{ currentUser.firstName }} {{ currentUser.lastName }}</h4>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!!
-  </h1>
-<!--  <router-outlet/>-->
-  <div class="flex">
-    <!-- Sidebar -->
-    <div
-      class="fixed top-0 left-0 z-40 w-64 h-screen bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700"
-    >
-      <app-sidebar></app-sidebar>
-    </div>
-
-    <!-- Main Content -->
-    <div class="flex-1 ml-72">
-      <div *ngIf="currentUser && !isSignInUpRoute" class="p-8">
-        <!-- Add more padding to ensure it doesn’t touch the sidebar -->
-        <h4>Hello, {{ currentUser.firstName }} {{ currentUser.lastName }}</h4>
-        <h1 class="text-3xl font-bold underline">Hello world!!</h1>
-      </div>
-    </div>
   </div>
+
+    <div>
+
+      <div class="flex-1 flex  justify-center items-center p-4 sm:ml-64 bg-gray-100">
+        <router-outlet></router-outlet>
+
+      </div>
+
+    </div>
 </div>
 
-<div class="flex-1 ml-72">
-      <router-outlet></router-outlet>
 
-</div>
 
 
 

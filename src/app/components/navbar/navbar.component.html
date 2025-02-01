@@ -1,1 +1,18 @@
-<p>navbar works!</p>
+
+<nav class="bg-blue-600 py-4 text-white flex justify-between items-center fixed w-full z-40 ">
+<!--  Logo-->
+
+<!--  Toggle button for sidebar-->
+  <button (click)="toggleSidebar()" class="md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+
+  <div class="text-xl font-bold">Applicatiofy</div>
+<!--  User Profile-->
+  <div class="flex items-center space-x-4">
+    <span>Ronaldo</span>
+    <img src="https://via.placeholder.com/40" alt="Profile" class="rounded-full h-10 w-10" />
+  </div>
+</nav>
