@@ -1,8 +1,76 @@
-<p>user-profile works!</p>
-<p>First Name: {{currentUser?.firstName}}</p>
 
-<button (click) ="onUpdate()">Update</button>
 
-<button (click) = "onDelete()">Delete</button>
 
-<button (click) = "user()">Click me for info</button>
+<!--<div>-->
+
+<!--  <div>-->
+<!--    <label class="label">First Name</label>-->
+<!--    <p>{{currentUser?.firstName}}</p>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <label class="label">Last Name:</label>-->
+<!--    <span>{{currentUser?.lastName}}</span>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <label class="label">Username</label>-->
+<!--    <span class=" disabled disabled:cursor-not-allowed text-gray-400"  >{{currentUser?.username}}</span>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+<!--<button (click) ="onUpdate()">Update</button>-->
+
+
+
+
+
+<!--<div>-->
+
+<!--  <span class="text-red-400" >Danger area</span>-->
+
+<!--  <button (click) = "onDelete()">Delete</button>-->
+<!--</div>-->
+
+
+
+<div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-6">
+  <!-- Profile Information -->
+  <div class="mb-4">
+    <h2 class="text-xl font-semibold text-gray-800">User Profile</h2>
+    <p class="text-sm text-gray-500">Manage your personal information</p>
+  </div>
+
+  <div class="space-y-4">
+    <div>
+      <label class="block text-gray-600 font-medium">First Name</label>
+      <p class="text-gray-800 font-semibold">{{currentUser?.firstName}}</p>
+    </div>
+
+    <div>
+      <label class="block text-gray-600 font-medium">Last Name</label>
+      <p class="text-gray-800 font-semibold">{{currentUser?.lastName}}</p>
+    </div>
+
+    <div>
+      <label class="block text-gray-600 font-medium">Username</label>
+      <span class="text-gray-500 font-medium cursor-not-allowed">{{currentUser?.username}}</span>
+    </div>
+  </div>
+
+  <!-- Update Button -->
+  <button (click)="onUpdate()" class="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
+    Update Profile
+  </button>
+</div>
+
+<!-- Danger Area -->
+<div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-6">
+  <span class="text-red-500 font-semibold text-lg">Danger Zone</span>
+
+  <button (click)="onDelete()" class="mt-4 w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
+    Delete Account
+  </button>
+</div>
+

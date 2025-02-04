@@ -3,7 +3,7 @@ import {Router, RouterLink} from "@angular/router";
 import {AuthService} from '../../services/auth.service';
 import {User} from '../../Interfaces/IUser';
 import {NgClass, NgIf} from '@angular/common';
-import {faBorderAll, faFolderClosed,faFolderPlus,faSliders,faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import {faBorderAll, faFolderClosed,faFolderPlus,faSliders,faRightFromBracket,faBars} from '@fortawesome/free-solid-svg-icons';
 import {FaDuotoneIconComponent, FaIconComponent,} from '@fortawesome/angular-fontawesome';
 
 
@@ -13,7 +13,6 @@ import {FaDuotoneIconComponent, FaIconComponent,} from '@fortawesome/angular-fon
     NgClass,
     RouterLink,
     FaIconComponent,
-    FaDuotoneIconComponent
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
@@ -26,6 +25,7 @@ export class SidebarComponent implements OnInit{
   faFolderPlus = faFolderPlus
   faSliders = faSliders
   faRightFromBracket =faRightFromBracket
+  faBars = faBars
 
   @Input() isOpen = false
 

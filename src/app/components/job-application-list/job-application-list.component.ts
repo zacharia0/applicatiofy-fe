@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {JobApplicationService} from '../../services/job-application.service';
 import {IJobApplicationForm} from '../../Interfaces/IJobApplicationForm';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {faTrashCan,faEye} from '@fortawesome/free-solid-svg-icons';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
@@ -12,7 +12,8 @@ import {FaIconComponent} from '@fortawesome/angular-fontawesome';
     NgForOf,
     NgIf,
     RouterLink,
-    FaIconComponent
+    FaIconComponent,
+    NgClass
   ],
   templateUrl: './job-application-list.component.html',
   styleUrl: './job-application-list.component.css'
@@ -26,6 +27,11 @@ export class JobApplicationListComponent implements OnInit{
 
   itemsPerPage = 5
   currentPage = 1
+
+  jobApplicationList!:IJobApplicationForm[]
+  // jobId!:number
+  constructor(private jobApplicationService:JobApplicationService) {
+  }
 
   get PaginatedItem(){
     const startIndex = (this.currentPage -1) * this.itemsPerPage
@@ -51,10 +57,7 @@ export class JobApplicationListComponent implements OnInit{
 
 
 
-  jobApplicationList!:IJobApplicationForm[]
-  // jobId!:number
-  constructor(private jobApplicationService:JobApplicationService) {
-  }
+
 
   ngOnInit() {
     this.jobApplicationService.jobApplications$.subscribe({

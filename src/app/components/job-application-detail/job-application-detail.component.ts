@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {JobApplicationService} from '../../services/job-application.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {JobStatus, JobStatus2} from '../../Enums/JobStatus';
-import {faTrashCan,faPen} from '@fortawesome/free-solid-svg-icons';
+import {faTrashCan,faPen,faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -13,7 +13,8 @@ import {FaIconComponent} from '@fortawesome/angular-fontawesome';
     NgIf,
     ReactiveFormsModule,
     NgForOf,
-    FaIconComponent
+    FaIconComponent,
+    RouterLink
   ],
   templateUrl: './job-application-detail.component.html',
   styleUrl: './job-application-detail.component.css'
@@ -23,6 +24,7 @@ export class JobApplicationDetailComponent implements OnInit {
   // ICONS
   faTrashCan = faTrashCan
   faPen = faPen
+  faArrowLeft =faArrowLeft
 
 
 
@@ -58,7 +60,12 @@ export class JobApplicationDetailComponent implements OnInit {
         id: [this.singleJobApplication?.id],
         jobTitle: [this.singleJobApplication?.jobTitle],
         companyName: [this.singleJobApplication?.companyName],
-        status: [this.singleJobApplication?.status]
+        status: [this.singleJobApplication?.status],
+        appliedDate:[this.singleJobApplication?.appliedDate],
+        interviewDate:[this.singleJobApplication?.interviewDate],
+        applicationLink:[this.singleJobApplication?.applicationLink],
+        recruiterName:[this.singleJobApplication?.recruiterName],
+        recruiterContact:[this.singleJobApplication?.recruiterContact]
       })
     })
   }

@@ -5,7 +5,7 @@ export interface IJobApplicationForm {
   id:number,
   jobTitle:string,
   companyName:string,
-  applicationDate:Date,
+  appliedDate:Date,
   interviewDate:Date,
   applicationMethod:string,
   status:JobStatus;

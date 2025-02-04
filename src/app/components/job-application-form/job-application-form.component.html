@@ -1,48 +1,57 @@
-<form [formGroup]="applicationForm" (ngSubmit)="onSubmitForm()">
-  <div>
-    Job Title:
-    <input type="text" formControlName='jobTitle'>
-  </div>
-  <div>
-    Company Name:
-    <input type="text" formControlName='companyName'>
-  </div>
-  <div>
-    Application Date:
-    <input type="date" formControlName='applicationDate'>
-  </div>
-  <div>
-    Interview Date:
-    <input type="date" formControlName = 'interviewDate'>
-  </div>
-  <div>
-    Application Method:
-    <input type="text" formControlName='applicationMethod'>
-  </div>
-  <div>
-    Application Status:
-<!--    <input type="text" formControlName='status'>-->
-    <select formControlName = "status"  >
-      <option *ngFor="let status of jobStatusOptions2"  [value]="status.key">{{status.value}}</option>
-    </select>
-  </div>
-  <div>
-    Application Link:
-    <input type="text" formControlName='applicationLink'>
-  </div>
-  <div>
-    Recruiter Name:
-    <input type="text" formControlName = 'recruiterName'>
-  </div>
-  <div>
-    Recruiter Contact:
-    <input type="text" formControlName = 'recruiterContact'>
-  </div>
-  <div>
-    Notes:
-    <input type="text" formControlName = 'notes'>
-  </div>
 
-  <button type="submit">Create Job Application</button>
+<div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Create Job Application</h2>
+  <form [formGroup]="applicationForm" (ngSubmit)="onSubmitForm()" class="space-y-6" >
+    <div>
+      <label class="label">Job Title*:</label>
+      <input type="text" formControlName='jobTitle' class="input-field">
+      <span *ngIf="applicationForm.get('jobTitle')?.invalid && applicationForm.get('jobTitle')?.touched" class="block bg-red-400 py-2 px-4 rounded-sm mt-2 items-center w-60  ">Job title is required.</span>
+    </div>
+    <div>
+      <label class="label">Company Name*:</label>
 
-</form>
+      <input type="text" formControlName='companyName' class="input-field">
+      <span *ngIf="applicationForm.get('companyName')?.invalid && applicationForm.get('companyName')?.touched" class="block bg-red-400 py-2 px-4 rounded-sm mt-2 items-center w-60"> Company name is required.</span>
+    </div>
+    <div>
+      <label class="label">Application Date:</label>
+      <input type="date" formControlName='appliedDate' class="input-field">
+    </div>
+    <div>
+      <label class = "block text-sm text-gray-700 font-medium">Interview Date:</label>
+      <input type="date" formControlName = 'interviewDate' class="input-field">
+    </div>
+    <div>
+      <label  class="label"> Application Method: (e.g. Applied Online,In-person):</label>
+      <input type="text" formControlName='applicationMethod' class = "input-field">
+    </div>
+    <div>
+      <label class="label">Job Status*:</label>
+      <select formControlName = "status"  class="input-field" >
+        <option *ngFor="let status of jobStatusOptions2"  [value]="status.key">{{status.value}}</option>
+        <span *ngIf = "applicationForm.get('jobStatus')?.invalid && applicationForm.get('jobStatus')?.touched" class="block bg-red-400 py-2 px-4 rounded-sm mt-2 items-center w-60">Job status is required.</span>
+      </select>
+    </div>
+    <div>
+      <label class="label">Application Link:</label>
+      <input type="text" formControlName='applicationLink' class="input-field">
+    </div>
+    <div>
+      <label class="label">Recruiter Name:</label>
+      <input type="text" formControlName = 'recruiterName' class="input-field">
+    </div>
+    <div>
+      <label class="label">Recruiter Contact:</label>
+      <input type="text" formControlName = 'recruiterContact' class = "input-field">
+    </div>
+    <div>
+      <label>Notes:</label>
+      <input type="text" formControlName = 'notes' class = "input-field h-20 resize-none">
+    </div>
+
+    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition disabled:bg-blue-300 " [disabled]="applicationForm.invalid">Create Job Application</button>
+
+  </form>
+
+</div>
+

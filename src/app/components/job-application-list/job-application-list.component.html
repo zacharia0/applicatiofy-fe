@@ -1,32 +1,48 @@
-<div *ngIf="jobApplicationList">
+<div *ngIf="jobApplicationList.length !== 0">
 
-<!--  Table layout (visible on medium screens and above)-->
-  <div  class="hidden md:block overflow-x-auto mr-8">
-    <table class="min-w-full bg-white border border-gray-300">
+  <!--  Table layout (visible on medium screens and above)-->
+  <div class="hidden md:block overflow-x-auto mr-8 mt-8">
+    <table class="min-w-full bg-white border border-gray-300 table-fixed">
       <thead>
-        <tr class="bg-gray-100">
-          <th class="py-2 px-4 border-b">Job Title</th>
-          <th class="py-2 px-4 border-b">Company Name</th>
-          <th class="py-2 px-4 border-b">Status</th>
-          <th class="py-2 px-4 border-b">Applied Date</th>
-          <th class="py-2 px-4 border-b">Interview Date</th>
-          <th class="py-2 px-4 border-b">Application Link</th>
-          <th class ="py-2 px-4 border-b">Recruiter Name</th>
-          <th class="py-2 px-4 border-b"> Actions</th>
-        </tr>
+      <tr class="bg-gray-100">
+        <th class="py-2 px-4 border-b text-left whitespace-nowrap overflow-hidden truncate">Job Title</th>
+        <th class="py-2 px-4 border-b text-left whitespace-nowrap overflow-hidden truncate">Company Name</th>
+        <th class="py-2 px-4 border-b text-left whitespace-nowrap overflow-hidden truncate">Status</th>
+        <th class="py-2 px-4 border-b text-left whitespace-nowrap overflow-hidden truncate">Applied Date</th>
+        <th class="py-2 px-4 border-b text-left whitespace-nowrap overflow-hidden truncate">Interview Date</th>
+        <th class="py-2 px-4 border-b text-left whitespace-nowrap overflow-hidden truncate">Application Link</th>
+        <th class="py-2 px-4 border-b text-left whitespace-nowrap overflow-hidden truncate">Recruiter Name</th>
+        <th class="py-2 px-4 border-b text-left whitespace-nowrap overflow-hidden truncate"> Actions</th>
+      </tr>
       </thead>
       <tbody>
       <tr *ngFor="let job of jobApplicationList" class="hover:bg-blue-50">
-        <td class="py-2 px-4 border-b ">{{job.jobTitle}}</td>
-        <td class="py-2 px-4 border-b">{{job.companyName}}</td>
-        <td class="py-2 px-4 border-b">{{job.status}}</td>
-        <td class="py-2 px-4 border-b">{{job.applicationDate || "N/A"}} </td>
-        <td class="py-2 px-4 border-b">{{job.interviewDate || "N/A"}}</td>
-        <td class="py-2 px-4 border-b"><a href="{{job.applicationLink}}" target="_blank">{{job.applicationLink || "N/A"}}</a></td>
-        <td class="py-2 px-4 border-b">{{job.recruiterName || "N/A"}}</td>
-        <td class = "py-2 px-4 border-b">
-          <button class="bg-red-500 hover:bg-red-700  rounded-lg py-2 px-4 text-white" (click)="onDelete(job.id)"><fa-icon [icon] = "faTrashCan"/></button>
-          <button class="px-4 py-2 bg-gray-400 hover:bg-gray-600 text-white rounded-lg ml-4"  routerLink = "/application-detail/{{job.id}}"><fa-icon [icon] = "faEye"/></button>
+        <td class="py-2 px-4 border-b ">{{ job.jobTitle }}</td>
+        <td class="py-2 px-4 border-b">{{ job.companyName }}</td>
+        <td class="py-2 px-4 border-b"
+            [ngClass]="{
+            'text-[#36A2EB]':job.status === 'APPLIED',
+            'text-[#FF6384]':job.status === 'INTERVIEW',
+            'text-[#FF9F40]' :job.status === 'OFFERED',
+            'text-[#FFCD56]':job.status === 'REJECTED'
+            }"
+        >
+          {{ job.status }}
+        </td>
+        <td class="py-2 px-4 border-b">{{ job.appliedDate || "n/a" }}</td>
+        <td class="py-2 px-4 border-b">{{ job.interviewDate || "n/a" }}</td>
+        <td class="py-2 px-4 border-b"><a href="{{job.applicationLink}}"
+                                          target="_blank">{{ job.applicationLink || "n/a" }}</a></td>
+        <td class="py-2 px-4 border-b">{{ job.recruiterName || "n/a" }}</td>
+        <td class="py-2 px-4 border-b">
+          <button class="bg-red-500 hover:bg-red-700 rounded-lg py-2 px-4 text-white mr-2 mb-1"
+                  (click)="onDelete(job.id)">
+            <fa-icon [icon]="faTrashCan"/>
+          </button>
+          <button class=" bg-gray-400 hover:bg-gray-600 rounded-lg px-4 py-2  text-white  ml-2 mt-1"
+                  routerLink="/application-detail/{{job.id}}">
+            <fa-icon [icon]="faEye"/>
+          </button>
         </td>
       </tr>
       </tbody>
@@ -34,44 +50,47 @@
   </div>
 
 
-<!--  Card Layout (Visible on small screens-->
-  <div *ngFor="let job of jobApplicationList" class="block md:hidden space-y-4 mr-8">
+  <!--  Card Layout (Visible on small screens-->
+  <div *ngFor="let job of jobApplicationList" class="block md:hidden space-y-4 mr-8 mt-2 hover:bg-blue-500">
     <div class="bg-white py-4 border border-gray-300 rounded-lg shadow-sm">
-      <div  class="flex flex-col space-y-2 ml-2 overflow-x-auto">
-        <div><span class="font-semibold">Job Title:</span> {{job.jobTitle}}</div>
-        <div><span class="font-semibold">Company Name: </span> {{job.companyName}}</div>
-        <div><span class ="font-semibold">Status:</span> {{job.status}}</div>
-        <div><span class="font-semibold">Applied Date:</span> {{job.applicationDate || "N/A"}}</div>
-        <div><span class="font-semibold">Application Link:</span> {{job.applicationLink || "N/A"}}</div>
-        <div><span class="font-semibold">Recruiter Name:</span> {{job.recruiterName || "N/A"}}</div>
+      <div class="flex flex-col space-y-2 ml-2 overflow-x-auto">
+        <div><span class="font-semibold">Job Title:</span> {{ job.jobTitle }}</div>
+        <div><span class="font-semibold">Company Name: </span> {{ job.companyName }}</div>
+        <div><span class="font-semibold">Status:</span>
+          <span
+            [ngClass]="{
+            'text-[#36A2EB]':job.status === 'APPLIED',
+            'text-[#FF6384]':job.status === 'INTERVIEW',
+            'text-[#FF9F40]' :job.status === 'OFFERED',
+            'text-[#FFCD56]':job.status === 'REJECTED'
+            }"
+
+          >
+          {{ job.status }}
+        </span>
+        </div>
+        <div><span class="font-semibold">Applied Date:</span> {{ job.appliedDate || "n/a" }}</div>
+        <div><span class="font-semibold">Application Link:</span> {{ job.applicationLink || "n/a" }}</div>
+        <div><span class="font-semibold">Recruiter Name:</span> {{ job.recruiterName || "n/a" }}</div>
+        <div><span class="font-semibold">Recruiter Contact:</span> {{ job.recruiterContact || "n/a" }}</div>
+
         <div>
-          <button class="bg-red-500 py-2 px-4 rounded-lg text-white hover:bg-red-600" (click)="onDelete(job.id)"><fa-icon [icon] = "faTrashCan"/></button>
-          <button class="bg-gray-400 hover:bg-gray-600 rounded-lg py-2 px-4 ml-2 text-white" routerLink = "/application-detail/{{job.id}}"><fa-icon [icon] = "faEye"/></button>
+          <button class="bg-red-500 py-2 px-4 rounded-lg text-white hover:bg-red-600 mr-1" (click)="onDelete(job.id)">
+            <fa-icon [icon]="faTrashCan"/>
+          </button>
+          <button class="bg-gray-400 hover:bg-gray-600 rounded-lg py-2 px-4 ml-1 text-white"
+                  routerLink="/application-detail/{{job.id}}">
+            <fa-icon [icon]="faEye"/>
+          </button>
         </div>
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
-<div *ngIf="jobApplicationList.length === 0">
-  <span>Empty Job Application</span>
-  <button routerLink = "/create-job">Add Job Application</button>
+
+<div *ngIf="jobApplicationList.length === 0" class="flex justify-center items-center h-screen">
+  <span class="mr-1 text-gray-700">Empty Job Application.</span>
+  <button routerLink="/create-job" class="underline text-blue-400 font-semibold "> Add new job application.</button>
 </div>
 
 

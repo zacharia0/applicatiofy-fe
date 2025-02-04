@@ -120,6 +120,7 @@ export class JobApplicationService {
       next: (data) => {
         console.log(data)
         const transformData = this.transformData(data)
+        console.log(transformData)
         this.jobStatusCountsSubject.next(transformData);
       },
       error: (err) => {

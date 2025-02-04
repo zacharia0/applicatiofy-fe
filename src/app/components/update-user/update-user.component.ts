@@ -50,9 +50,15 @@ export class UpdateUserComponent {
         }
       })
 
-
-
     }
 
   }
+
+  onCancel(){
+    this.router.navigate(["/user-profile"])
+
+  }
+
+
+
 }

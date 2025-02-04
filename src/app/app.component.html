@@ -1,18 +1,19 @@
-<div class="flex min-h-screen" >
+<div class="bg-gray-100 min-h-screen w-full flex" >
 
   <div *ngIf="currentUser">
     <app-sidebar ></app-sidebar>
 
   </div>
 
-    <div>
 
-      <div class="flex-1 flex  justify-center items-center p-4 sm:ml-64 bg-gray-100">
+      <div
+        class="flex-1  p-6 pt-12"
+        [class.sm:ml-64] = "currentUser"
+      >
         <router-outlet></router-outlet>
 
       </div>
 
-    </div>
 </div>
 
 

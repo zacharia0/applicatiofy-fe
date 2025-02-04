@@ -1,31 +1,127 @@
-<div *ngIf="!isEditing">
-  {{singleJobApplication?.jobTitle}}
-  {{singleJobApplication?.companyName}}
+<div *ngIf="!isEditing" class="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl mx-auto">
+  <button routerLink="/application-list" class="py-2 px-4 rounded-lg mb-2 bg-green-400">
+    <fa-icon [icon]='faArrowLeft'/>
+    Job Applications
+  </button>
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">Job Application Details</h2>
 
-  <button (click) = 'onDelete()' class="bg-red-500 hover:bg-red-600 rounded-lg py-2 px-6 mr-3 text-white"><fa-icon [icon] ="faTrashCan"/></button>
-  <button (click) = "onEditing()" class="bg-blue-500 hover:bg-blue-600 rounded-lg py-2 px-6 text-white "><fa-icon [icon] = "faPen"/></button>
-
-</div>
-
-
-<div *ngIf="isEditing">
-  <form [formGroup] = "jobApplicationForm" >
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div>
+      <label class="font-medium text-gray-600">Job Title:</label>
+      <p class="text-gray-800 font-semibold">{{ singleJobApplication?.jobTitle }}</p>
+    </div>
 
     <div>
-      Job Title:
-      <input formControlName = "jobTitle" type="text">
+      <label class="font-medium text-gray-600">Company Name:</label>
+      <p class="text-gray-800 font-semibold">{{ singleJobApplication?.companyName }}</p>
+    </div>
 
-      companyName:
-      <input type="text" formControlName = "companyName">
+    <div>
+      <label class="font-medium text-gray-600">Status:</label>
+      <p class="text-gray-800 font-semibold">{{ singleJobApplication?.status }}</p>
+    </div>
 
-      status:
-      <select formControlName = "status">
-        <option *ngFor="let status of jobStatusLabel" [value]="status.key">{{status.value}}</option>
-      </select>
+    <div *ngIf="singleJobApplication?.appliedDate">
+      <label class="font-medium text-gray-600">Applied Date:</label>
+      <p class="text-gray-800 font-semibold">{{ singleJobApplication?.appliedDate }}</p>
+    </div>
 
+    <div *ngIf="singleJobApplication?.interviewDate">
+      <label class="font-medium text-gray-600">Interview Date:</label>
+      <p class="text-gray-800 font-semibold">{{ singleJobApplication?.interviewDate }}</p>
+    </div>
+
+    <div *ngIf="singleJobApplication?.applicationLink">
+      <label class="font-medium text-gray-600">Application Link:</label>
+      <p class="text-blue-500 hover:underline break-all">
+        <a [href]="singleJobApplication?.applicationLink"
+           target="_blank">{{ singleJobApplication?.applicationLink }}</a>
+      </p>
+    </div>
+
+    <div *ngIf="singleJobApplication?.recruiterName">
+      <label class="font-medium text-gray-600">Recruiter Name:</label>
+      <p class="text-gray-800">{{ singleJobApplication?.recruiterName }}</p>
+    </div>
+
+    <div *ngIf="singleJobApplication?.recruiterContact">
+      <label class="font-medium text-gray-600">Recruiter Contact:</label>
+      <p class="text-gray-800">{{ singleJobApplication?.recruiterContact }}</p>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="flex items-center gap-3 mt-6">
+    <button (click)="onDelete()" class="bg-red-500 hover:bg-red-600 text-white rounded-lg py-2 px-6 flex items-center">
+      <fa-icon [icon]="faTrashCan" class="mr-2"></fa-icon>
+      Delete
+    </button>
+
+    <button (click)="onEditing()"
+            class="bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-2 px-6 flex items-center">
+      <fa-icon [icon]="faPen" class="mr-2"></fa-icon>
+      Edit
+    </button>
+  </div>
+</div>
+
+
+<div *ngIf="isEditing" class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
+
+  <form [formGroup]="jobApplicationForm" class="space-y-6">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Job Title:</label>
+        <input formControlName="jobTitle" type="text" class="input-field">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Company Name:</label>
+        <input type="text" formControlName="companyName" class="input-field">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Status:</label>
+        <select formControlName="status" class="input-field">
+          <option *ngFor="let status of jobStatusLabel" [value]="status.key">{{ status.value }}</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Applied Date:</label>
+        <input type="date" formControlName="appliedDate" class="input-field">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Interview Date:</label>
+        <input type="date" formControlName="interviewDate" class="input-field">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Application Link:</label>
+        <input type="text" formControlName="applicationLink" class="input-field">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Recruiter Name:</label>
+        <input type="text" formControlName="recruiterName" class="input-field">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Recruiter Contact:</label>
+        <input type="text" formControlName="recruiterContact" class="input-field">
+      </div>
 
     </div>
-    <button (click) = "onCancel()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg mr-2 mt-3">Cancel</button>
-    <button (click) = "onUpdate()" class="bg-blue-500 hover:bg-blue-600 rounded-lg py-2 px-4 ml-2 mt-3">Save</button>
+
+    <div class="flex justify-end space-x-4">
+      <button (click)="onCancel()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Cancel</button>
+      <button (click)="onUpdate()" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Save</button>
+    </div>
+
   </form>
+
 </div>
+

@@ -1,13 +1,13 @@
 export enum JobStatus{
   APPLIED = "APPLIED",
-  INTERVIEW_SCHEDULED ="INTERVIEW_SCHEDULED",
+  INTERVIEW ="INTERVIEW",
   OFFERED = "OFFERED",
   REJECTED = "REJECTED"
 }
 
 export enum JobStatus2{
   APPLIED = "Applied",
-  INTERVIEW_SCHEDULED ="Interview Scheduled",
+  INTERVIEW ="Interview",
   OFFERED = "Offered",
   REJECTED = "Rejected"
 }
@@ -16,7 +16,7 @@ export enum JobStatus2{
 // Create a mapping between display values and backend values
 export const JobStatusMapping :{[key:string]:string} = {
   [JobStatus.APPLIED]:"APPLIED",
-  [JobStatus.INTERVIEW_SCHEDULED]:'INTERVIEW_SCHEDULED',
+  [JobStatus.INTERVIEW]:'INTERVIEW',
   [JobStatus.OFFERED]:"OFFERED",
   [JobStatus.REJECTED]:'REJECTED'
 

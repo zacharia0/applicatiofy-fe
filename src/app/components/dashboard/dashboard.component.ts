@@ -17,12 +17,7 @@ import {JobStatusPieChartComponent} from '../job-status-pie-chart/job-status-pie
 })
 export class DashboardComponent {
 
-
-
-
   constructor(private authService:AuthService) {
   }
-  onLogout():void{
-    this.authService.logOut()
-  }
+
 }

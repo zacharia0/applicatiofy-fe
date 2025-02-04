@@ -5,13 +5,14 @@ import {IJobApplicationAccount} from '../../Interfaces/IJobApplicationAccount';
 import {User} from '../../Interfaces/IUser';
 import {JobApplicationService} from '../../services/job-application.service';
 import {JobStatus, JobStatus2, JobStatusMapping} from '../../Enums/JobStatus';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-job-application-form',
   imports: [
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './job-application-form.component.html',
   styleUrl: './job-application-form.component.css'
@@ -36,8 +37,8 @@ export class JobApplicationFormComponent implements OnInit {
           this.account = {
             id: user?.id,
             username: user?.username,
-            firstName: user.firstName,
-            lastName: user.lastName
+            firstName: user?.firstName,
+            lastName: user?.lastName
           }
         }
         this.initializeForm(this.account)
@@ -53,7 +54,7 @@ export class JobApplicationFormComponent implements OnInit {
     this.applicationForm = this.fb.group({
       jobTitle: ['', [Validators.required]],
       companyName: ['', [Validators.required]],
-      applicationDate: [''],
+      appliedDate: [''],
       interviewDate: ['', ],
       applicationMethod: ['', ],
       status: [JobStatus.APPLIED],

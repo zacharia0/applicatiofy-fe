@@ -37,13 +37,17 @@ export class UserProfileComponent implements OnInit{
       this.userService.delete(this.currentUser?.username).subscribe({
         next:() =>{
           console.log("Successfully Deleted")
+          this.authService.logOut()
+          this.currentUser = null
+          this.router.navigate(['/login'])
         },
         error:(err) =>{
           console.log(err)
         }
       })
       console.log("Deleted " + this.currentUser.username)
-      this.router.navigate(['/login'])
+
+
 
     }
 
