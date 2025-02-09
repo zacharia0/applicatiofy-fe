@@ -2,17 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {IJobApplicationAccount} from '../../Interfaces/IJobApplicationAccount';
-import {User} from '../../Interfaces/IUser';
 import {JobApplicationService} from '../../services/job-application.service';
 import {JobStatus, JobStatus2, JobStatusMapping} from '../../Enums/JobStatus';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgForOf, NgIf, TitleCasePipe} from '@angular/common';
+import Notiflix from 'notiflix';
 
 @Component({
   selector: 'app-job-application-form',
   imports: [
     ReactiveFormsModule,
     NgForOf,
-    NgIf
+    NgIf,
+    TitleCasePipe
   ],
   templateUrl: './job-application-form.component.html',
   styleUrl: './job-application-form.component.css'
@@ -23,7 +24,7 @@ export class JobApplicationFormComponent implements OnInit {
   account!: IJobApplicationAccount
 
   jobStatusOptions = Object.values(JobStatus)
-  jobStatusOptions2:{key:string,value:string}[] = this.getJobStatusOption()
+  // jobStatusOptions2:{key:string,value:string}[] = this.getJobStatusOption()
 
   constructor(private fb: FormBuilder, private authService: AuthService, private jobApplicationService:JobApplicationService) {
 
@@ -42,6 +43,7 @@ export class JobApplicationFormComponent implements OnInit {
           }
         }
         this.initializeForm(this.account)
+
 
       },
       error: (err) => {
@@ -97,6 +99,8 @@ export class JobApplicationFormComponent implements OnInit {
             notes: '',
             // account:{}
           })
+          Notiflix.Notify.success("Successfully added new job.")
+
         },
         error:(err) =>{
           console.log(err)

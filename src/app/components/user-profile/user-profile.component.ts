@@ -3,6 +3,7 @@ import {AuthService} from '../../services/auth.service';
 import {User} from '../../Interfaces/IUser';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
+import Notiflix from 'notiflix';
 
 @Component({
   selector: 'app-user-profile',
@@ -40,6 +41,8 @@ export class UserProfileComponent implements OnInit{
           this.authService.logOut()
           this.currentUser = null
           this.router.navigate(['/login'])
+          Notiflix.Notify.failure("Successfully deleted user.")
+
         },
         error:(err) =>{
           console.log(err)

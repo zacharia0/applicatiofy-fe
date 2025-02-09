@@ -7,6 +7,7 @@ import {UpdateUser} from '../../Interfaces/IUpdateUser';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {Subject, takeUntil} from 'rxjs';
+import Notiflix from 'notiflix';
 
 @Component({
   selector: 'app-update-user',
@@ -43,6 +44,8 @@ export class UpdateUserComponent {
         next: () => {
           console.log("Successfully Updated.")
           this.router.navigate(["/user-profile"])
+          Notiflix.Notify.success("Successfully updated.")
+
         },
         error: (err) => {
           console.log(err)

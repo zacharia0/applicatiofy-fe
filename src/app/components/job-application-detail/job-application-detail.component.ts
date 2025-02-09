@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {JobStatus, JobStatus2} from '../../Enums/JobStatus';
 import {faTrashCan,faPen,faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import Notiflix from 'notiflix';
 
 @Component({
   selector: 'app-job-application-detail',
@@ -21,6 +22,7 @@ import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 })
 export class JobApplicationDetailComponent implements OnInit {
 
+  jobStatusOptions = Object.values(JobStatus)
   // ICONS
   faTrashCan = faTrashCan
   faPen = faPen
@@ -34,7 +36,7 @@ export class JobApplicationDetailComponent implements OnInit {
   jobApplicationForm!: FormGroup
   // jobStatusOptions = Object.values(JobStatus)
 
-  jobStatusLabel : {key:string,value:string}[] = this.getJobStatusOptions()
+  // jobStatusLabel : {key:string,value:string}[] = this.getJobStatusOptions()
 
   constructor(
     private route: ActivatedRoute,
@@ -89,6 +91,7 @@ export class JobApplicationDetailComponent implements OnInit {
           console.log("successfully Updated")
           // this.router.navigate("/application")
           this.isEditing = false
+          Notiflix.Notify.success("Successfully updated.")
         },
         error: (err) => {
           console.log(err)
@@ -101,8 +104,11 @@ export class JobApplicationDetailComponent implements OnInit {
   onDelete(): void {
     this.jobApplicationService.deleteJobApplication(Number(this.jobId)).subscribe({
       next: (data) => {
+        Notiflix.Notify.success("Successfully deleted.")
         console.log(data)
         this.router.navigate(["/application-list"])
+        console.log("Getting Notiflix ready...")
+
       },
       error: (err) => {
         console.warn(err)

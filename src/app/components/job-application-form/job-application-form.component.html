@@ -28,7 +28,7 @@
     <div>
       <label class="label">Job Status*:</label>
       <select formControlName = "status"  class="input-field" >
-        <option *ngFor="let status of jobStatusOptions2"  [value]="status.key">{{status.value}}</option>
+        <option *ngFor="let status of jobStatusOptions"  [value]="status">{{status | titlecase}}</option>
         <span *ngIf = "applicationForm.get('jobStatus')?.invalid && applicationForm.get('jobStatus')?.touched" class="block bg-red-400 py-2 px-4 rounded-sm mt-2 items-center w-60">Job status is required.</span>
       </select>
     </div>

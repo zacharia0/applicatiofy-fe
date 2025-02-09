@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {JobApplicationService} from '../../services/job-application.service';
 import {IJobApplicationForm} from '../../Interfaces/IJobApplicationForm';
-import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf, TitleCasePipe} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {faTrashCan,faEye} from '@fortawesome/free-solid-svg-icons';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import Notiflix from 'notiflix';
 
 @Component({
   selector: 'app-job-application-list',
@@ -13,7 +14,8 @@ import {FaIconComponent} from '@fortawesome/angular-fontawesome';
     NgIf,
     RouterLink,
     FaIconComponent,
-    NgClass
+    NgClass,
+    TitleCasePipe
   ],
   templateUrl: './job-application-list.component.html',
   styleUrl: './job-application-list.component.css'
@@ -63,8 +65,6 @@ export class JobApplicationListComponent implements OnInit{
     this.jobApplicationService.jobApplications$.subscribe({
       next:(jobList) =>{
         this.jobApplicationList = jobList
-        // this.jobId = jobList.id?
-        // console.log(this.jobApplicationList)
       },
       error:(err)=>{
         console.log(err)
@@ -79,6 +79,7 @@ export class JobApplicationListComponent implements OnInit{
   onDelete(id:number):void{
     this.jobApplicationService.deleteJobApplication(id).subscribe({
       next:() =>{
+        Notiflix.Notify.success("Successfully deleted.")
         console.log("Job Deleted")
       },
       error:(err) =>{

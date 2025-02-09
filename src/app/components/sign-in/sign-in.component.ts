@@ -1,12 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import {Router, RouterLink} from '@angular/router';
 import {ILogin} from '../../Interfaces/ILogin';
-import {log} from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 import {Subject, takeUntil} from 'rxjs';
-
+import Notiflix from 'notiflix';
 @Component({
   selector: 'app-sign-in',
   imports: [
@@ -23,7 +22,7 @@ export class SignInComponent {
   message:string = ""
   private destroy$ = new Subject<void>()
 
-  constructor(private fb:FormBuilder, private authService:AuthService, private router:Router) {
+  constructor(private fb:FormBuilder, private authService:AuthService, private router:Router,) {
     this.signInForm = this.fb.group({
       username:['',[Validators.required]],
       password:['',[Validators.required]]
@@ -38,6 +37,7 @@ export class SignInComponent {
         next:() =>{
           console.log("Logged In success Fully")
           this.router.navigate(['/dashboard'])
+          Notiflix.Notify.success('Logged in Successfully! ');
         },
         error:(err) =>{
           console.log("error login in")

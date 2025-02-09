@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {NgIf} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {SignInComponent} from '../sign-in/sign-in.component';
 import {AuthService} from '../../services/auth.service';
-import {first, Subject, takeUntil} from 'rxjs';
+import { Subject, takeUntil} from 'rxjs';
 import {Router, RouterLink} from '@angular/router';
 import {IRegister} from '../../Interfaces/IRegister';
+import Notiflix from 'notiflix';
 
 @Component({
   selector: 'app-signup',
@@ -51,6 +51,7 @@ export class SignupComponent implements OnInit{
         next:() =>{
           console.log("registered in successfully ")
           this.router.navigate(["/login"])
+          Notiflix.Notify.success("Successfully Registered.")
         },
         error:(err)=>{
           console.log(err)

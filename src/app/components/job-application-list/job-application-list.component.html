@@ -27,7 +27,7 @@
             'text-[#FFCD56]':job.status === 'REJECTED'
             }"
         >
-          {{ job.status }}
+          {{ job.status | titlecase }}
         </td>
         <td class="py-2 px-4 border-b">{{ job.appliedDate || "n/a" }}</td>
         <td class="py-2 px-4 border-b">{{ job.interviewDate || "n/a" }}</td>
@@ -66,7 +66,7 @@
             }"
 
           >
-          {{ job.status }}
+          {{ job.status | titlecase }}
         </span>
         </div>
         <div><span class="font-semibold">Applied Date:</span> {{ job.appliedDate || "n/a" }}</div>
