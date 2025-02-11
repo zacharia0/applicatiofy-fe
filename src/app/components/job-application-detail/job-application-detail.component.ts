@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {JobApplicationService} from '../../services/job-application.service';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf, TitleCasePipe} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {JobStatus, JobStatus2} from '../../Enums/JobStatus';
 import {faTrashCan,faPen,faArrowLeft} from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +15,9 @@ import Notiflix from 'notiflix';
     ReactiveFormsModule,
     NgForOf,
     FaIconComponent,
-    RouterLink
+    RouterLink,
+    TitleCasePipe,
+    NgClass
   ],
   templateUrl: './job-application-detail.component.html',
   styleUrl: './job-application-detail.component.css'
@@ -102,18 +104,39 @@ export class JobApplicationDetailComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.jobApplicationService.deleteJobApplication(Number(this.jobId)).subscribe({
-      next: (data) => {
-        Notiflix.Notify.success("Successfully deleted.")
-        console.log(data)
-        this.router.navigate(["/application-list"])
-        console.log("Getting Notiflix ready...")
 
+    Notiflix.Confirm.show(
+      'Confirm Job Deletion',
+      `Warning! Do you want to delete ${this.singleJobApplication?.jobTitle}?`,
+      'Confirm',
+      'Cancel',
+      () =>{
+        this.jobApplicationService.deleteJobApplication(Number(this.jobId)).subscribe({
+          next: (data) => {
+            Notiflix.Notify.success("Successfully Deleted.")
+            console.log(data)
+            this.router.navigate(["/application-list"])
+            console.log("Getting Notiflix ready...")
+
+          },
+          error: (err) => {
+            console.warn(err)
+            Notiflix.Notify.failure("There was an error deleting this job... please try again later.")
+          }
+        })
       },
-      error: (err) => {
-        console.warn(err)
+      () =>{
+        Notiflix.Notify.info('Job Deletion Canceled.')
+      },
+      {
+        width:'320px',
+        borderRadius:'8px',
+        titleColor:'#ff0000',
+        okButtonBackground:'#ff0000'
       }
-    })
+    )
+
+
   }
 
 

@@ -31,12 +31,11 @@ export class JobApplicationListComponent implements OnInit{
   currentPage = 1
 
   jobApplicationList!:IJobApplicationForm[]
-  // jobId!:number
   constructor(private jobApplicationService:JobApplicationService) {
   }
 
   get PaginatedItem(){
-    const startIndex = (this.currentPage -1) * this.itemsPerPage
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage
     const endIndex = startIndex + this.itemsPerPage
     return this.jobApplicationList.slice(startIndex,endIndex)
   }
@@ -77,15 +76,36 @@ export class JobApplicationListComponent implements OnInit{
 
 
   onDelete(id:number):void{
-    this.jobApplicationService.deleteJobApplication(id).subscribe({
-      next:() =>{
-        Notiflix.Notify.success("Successfully deleted.")
-        console.log("Job Deleted")
+    Notiflix.Confirm.show(
+      'Confirm Job Deletion',
+      'Warning! Do you want to delete this job?',
+      'Delete',
+      'Cancel',
+      () => {
+        this.jobApplicationService.deleteJobApplication(id).subscribe({
+          next:() =>{
+            console.log("Job Deleted")
+            Notiflix.Notify.success("Job successfully deleted.")
+          },
+          error:(err) =>{
+            Notiflix.Notify.failure("There was an error deleting this job!")
+          }
+        })
       },
-      error:(err) =>{
-        console.warn(err)
+
+      () =>{
+        console.log("User canceled Deletion.")
+        Notiflix.Notify.info("Job deletion canceled.")
+      },
+      {
+        width:'320px',
+        borderRadius: "8px",
+        titleColor:'#ff0000',
+        okButtonBackground:'#ff0000'
       }
-    })
+
+    );
+
 
   }
 

@@ -8,43 +8,45 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <div>
       <label class="font-medium text-gray-600">Job Title:</label>
-      <p class="text-gray-800 font-semibold">{{ singleJobApplication.jobTitle }}</p>
+      <p class="text-gray-800 font-semibold">{{ singleJobApplication?.jobTitle }}</p>
     </div>
 
     <div>
       <label class="font-medium text-gray-600">Company Name:</label>
-      <p class="text-gray-800 font-semibold">{{ singleJobApplication.companyName }}</p>
+      <p class="text-gray-800 font-semibold">{{ singleJobApplication?.companyName }}</p>
     </div>
 
     <div>
       <label class="font-medium text-gray-600">Status:</label>
-      <p class="text-gray-800 font-semibold">{{ singleJobApplication.status }}</p>
+      <p class="text-gray-800 font-semibold"
+
+      >{{ singleJobApplication?.status | titlecase }}  </p>
     </div>
 
-    <div *ngIf="singleJobApplication.appliedDate">
+    <div>
       <label class="font-medium text-gray-600">Applied Date:</label>
       <p class="text-gray-800 font-semibold">{{ singleJobApplication?.appliedDate }}</p>
     </div>
 
-    <div *ngIf="singleJobApplication.interviewDate">
+    <div >
       <label class="font-medium text-gray-600">Interview Date:</label>
-      <p class="text-gray-800 font-semibold">{{ singleJobApplication.interviewDate }}</p>
+      <p class="text-gray-800 font-semibold">{{ singleJobApplication?.interviewDate }} </p>
     </div>
 
-    <div *ngIf="singleJobApplication.applicationLink">
+    <div>
       <label class="font-medium text-gray-600">Application Link:</label>
       <p class="text-blue-500 hover:underline break-all">
-        <a [href]="singleJobApplication.applicationLink"
-           target="_blank">{{ singleJobApplication.applicationLink }}</a>
+        <a [href]="singleJobApplication?.applicationLink"
+           target="_blank">{{ singleJobApplication?.applicationLink }} </a>
       </p>
     </div>
 
-    <div *ngIf="singleJobApplication?.recruiterName">
+    <div>
       <label class="font-medium text-gray-600">Recruiter Name:</label>
       <p class="text-gray-800">{{ singleJobApplication?.recruiterName }}</p>
     </div>
 
-    <div *ngIf="singleJobApplication?.recruiterContact">
+    <div>
       <label class="font-medium text-gray-600">Recruiter Contact:</label>
       <p class="text-gray-800">{{ singleJobApplication?.recruiterContact }}</p>
     </div>
@@ -85,7 +87,7 @@
       <div>
         <label class="block text-gray-700 font-medium mb-1">Status:</label>
         <select formControlName="status" class="input-field">
-          <option *ngFor="let status of jobStatusOptions" [value]="status">{{ status}}</option>
+          <option *ngFor="let status of jobStatusOptions" [value]="status">{{ status | titlecase}}</option>
         </select>
       </div>
 
