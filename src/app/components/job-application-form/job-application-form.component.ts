@@ -6,6 +6,7 @@ import {JobApplicationService} from '../../services/job-application.service';
 import {JobStatus, JobStatus2, JobStatusMapping} from '../../Enums/JobStatus';
 import {NgForOf, NgIf, TitleCasePipe} from '@angular/common';
 import Notiflix from 'notiflix';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-job-application-form',
@@ -26,7 +27,7 @@ export class JobApplicationFormComponent implements OnInit {
   jobStatusOptions = Object.values(JobStatus)
   // jobStatusOptions2:{key:string,value:string}[] = this.getJobStatusOption()
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private jobApplicationService:JobApplicationService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private jobApplicationService:JobApplicationService, private router:Router) {
 
 
   }
@@ -100,6 +101,8 @@ export class JobApplicationFormComponent implements OnInit {
             // account:{}
           })
           Notiflix.Notify.success("Successfully added new job.")
+          this.router.navigate(['/dashboard'])
+
 
         },
         error:(err) =>{
